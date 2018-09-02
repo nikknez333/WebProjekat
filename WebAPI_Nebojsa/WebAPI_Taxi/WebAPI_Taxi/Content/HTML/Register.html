@@ -1,0 +1,96 @@
+﻿<form id="regForm" method="post" action="#">
+    <table border="1">
+        <tr>
+            <td colspan="2" align="center">
+                <b>Register</b>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Username
+            </td>
+            <td>
+                <input type="text" name="usernameRegID" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Password
+            </td>
+            <td>
+                <input type="password" name="passwordRegID"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Confirm password
+            </td>
+            <td>
+                <input type="password" name="password2RegID" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Name
+            </td>
+            <td>
+                <input type="text" name="nameRegID" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Surname
+            </td>
+            <td>
+                <input type="text" name="surnameRegID" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Email
+            </td>
+            <td>
+                <input type="email" name="emailRegID" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ID number
+            </td>
+            <td>
+                <input type="number" name="idNumberRegID" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Telephone number
+            </td>
+            <td>
+                <input type="number" name="telephoneRegID" />
+            </td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td align="center">
+                <select name="genderRegID">
+                    <option value="1">
+                        Male
+                    </option>
+                    <option value="2">
+                        Female
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" id="regSubmitRegID" value="Submit" />
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" value="1" name="roleID" />
+</form>
+
+<script>
+    validateRegister();
+</script>
