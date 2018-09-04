@@ -1,8 +1,9 @@
-﻿
+﻿@using Taxi_MVC.Models;
 @{
     Layout = null;
 }
 
+<h2>Korisnicko ime je zauzeto, izaberite drugo korisnicko ime</h2>
 
 <form action="/Taxi/Registration" method="post">
     <table border="1">
@@ -12,9 +13,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">
-
-            </td>
+            <td colspan="2"></td>
         </tr>
         <tr>
             <td>
@@ -37,7 +36,7 @@
                 Ime
             </td>
             <td>
-                <input type="text" name="Ime" />
+                <input type="text" name="Ime" value="@ViewBag.korisnik.Ime" />
             </td>
         </tr>
         <tr>
@@ -45,7 +44,7 @@
                 Prezime
             </td>
             <td>
-                <input type="text" name="Prezime" />
+                <input type="text" name="Prezime" value="@ViewBag.korisnik.Prezime" />
             </td>
         </tr>
         <tr>
@@ -54,12 +53,24 @@
             </td>
             <td>
                 <select name="Pol">
-                    <option value="MUSKI">
-                        Muski
-                    </option>
-                    <option value="ZENSKI">
-                        Zenski
-                    </option>
+                    @if (ViewBag.korisnik.Pol == EPol.MUSKI)
+                    {
+                        <option selected value="MUSKI">
+                                Muski
+                        </option>
+                        <option value="ZENSKI">
+                                Zenski
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="MUSKI">
+                                Muski
+                        </option>
+                        <option selected value="ZENSKI">
+                                Zenski
+                        </option>
+                    }
                 </select>
             </td>
         </tr>
@@ -68,7 +79,7 @@
                 JMBG
             </td>
             <td>
-                <input type="text" name="JMBG" />
+                <input type="text" name="JMBG" value="@ViewBag.korisnik.JMBG"/>
             </td>
         </tr>
         <tr>
@@ -76,12 +87,12 @@
                 Telefon
             </td>
             <td>
-                <input type="number" name="Telefon" />
+                <input type="number" name="Telefon" value="@ViewBag.korisnik.Telefon" />
             </td>
         </tr>
         <tr>
             <td colspan="2" align="center">
-                <input type="submit" value="Registruj" name="SubmitReg"/> 
+                <input type="submit" value="Registruj" name="SubmitReg" />
             </td>
         </tr>
     </table>

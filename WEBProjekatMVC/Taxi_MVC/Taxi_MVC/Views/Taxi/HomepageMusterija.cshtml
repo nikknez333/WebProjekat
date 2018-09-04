@@ -1,0 +1,94 @@
+﻿@using Taxi_MVC.Models;
+@{
+    Layout = null;
+}
+@{ 
+    var getVoznje = new Func<Dictionary<string, Voznja>>(() => (Dictionary<string, Voznja>)Session["Voznje"]);
+}
+<div>
+    <a href="/Taxi/Logout">Logout</a>
+    <a href="/Taxi/Izmena">Izmenite profil</a>
+    <a href="/Taxi/MusterijaZahtev">Zatrazite voznju</a>
+    <a href="/Taxi/Pregledaj">Upravljanje voznjama</a>
+    <a href="/Taxi/Pretraga">Pretraga voznji</a>
+</div>
+<h2>Dobrodosli, @(((Korisnik)Session["Ulogovan"]).Ime) @(((Korisnik)Session["Ulogovan"]).Prezime</h2>
+
+if(@ViewBag.broj != 0)
+{
+    <table border="1">
+        <caption>Prikaz voznji</caption>
+        <tr>
+            <th>
+                Ulica
+            </th>
+            <th>
+                Broj
+            </th>
+            <th>
+                Vreme porudzbine
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+        @foreach(KeyValuePair<string, Voznja> kv in getVoznje())
+        {
+            if(kv.Value.Musterija.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
+            {
+                <tr>
+                    <td>
+                        @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Ulica
+                    </td>
+                    <td>
+                        @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Broj
+                    </td>
+                    <td>
+                        @kv.Key
+                    </td>
+                    <td>
+                        @kv.Value.StatusVoznje
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <br />
+    <form action="/Taxi/FilterMusterija" method="post">
+        <select name="status">
+            <option value="NACEKANJU">
+                Na cekanju
+            </option>
+            <option value="FORMIRANA">
+                Formirane
+            </option>
+            <option value="OBRADJENA">
+                Obradjene
+            </option>
+            <option value="PRIHVACENA">
+                Prihvacena
+            </option>
+            <option value="OTKAZANA">
+                Otkazane
+            </option>
+            <option value="NEUSPESNA">
+                Neuspesne
+            </option>
+            <option value="USPESNA">
+                Uspesne
+            </option>
+        </select>
+        <input type="submit" value="Filtriraj voznje" />
+    </form>
+    <form action="/Taxi/SortirajMusterije" method="post">
+        <select name="sortiranje">
+            <option value="datum">
+                Po datumu
+            </option>
+            <option value="ocena">
+                Po oceni
+            </option>
+        </select>
+        <input type="submit" value="Sortiraj voznje" />
+    </form>
+}

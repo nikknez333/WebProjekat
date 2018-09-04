@@ -198,6 +198,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Taxi\Login.cshtml" />
     <Content Include="Views\Taxi\Registration.cshtml" />
+    <Content Include="Views\Taxi\Index.cshtml" />
+    <Content Include="Views\Taxi\RegistrationError.cshtml" />
+    <Content Include="Views\Taxi\LozinkaError.cshtml" />
+    <Content Include="Views\Taxi\KorisnickoImeError.cshtml" />
+    <Content Include="Views\Taxi\HomepageAdministrator.cshtml" />
+    <Content Include="Views\Taxi\HomepageVozac.cshtml" />
+    <Content Include="Views\Taxi\HomepageMusterija.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

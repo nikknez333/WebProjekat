@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<h2>Korisnicko ime koje ste uneli ne postoji, pokusajte ponovo</h2>
+
+<form action="/Taxi/Login" method="post">
+    <table border="1">
+        <tr>
+            <td>
+                Korisnicko ime
+            </td>
+            <td>
+                <input type="text" name="korisnickoIme" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Lozinka
+            </td>
+            <td>
+                <input type="password" name="lozinka" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="Log In" name="submitLogIn" />
+            </td>
+        </tr>
+    </table>
+</form>

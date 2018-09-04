@@ -88,3 +88,4 @@ D:\WEBProjekatMVC\Taxi_MVC\Taxi_MVC\bin\Microsoft.AI.Web.xml
 D:\WEBProjekatMVC\Taxi_MVC\Taxi_MVC\obj\Debug\Taxi_MVC.csproj.CopyComplete
 D:\WEBProjekatMVC\Taxi_MVC\Taxi_MVC\obj\Debug\Taxi_MVC.dll
 D:\WEBProjekatMVC\Taxi_MVC\Taxi_MVC\obj\Debug\Taxi_MVC.pdb
+D:\WEBProjekatMVC\Taxi_MVC\Taxi_MVC\obj\Debug\Taxi_MVC.csprojResolveAssemblyReference.cache
