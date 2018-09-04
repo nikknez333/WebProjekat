@@ -3,22 +3,26 @@
     Layout = null;
 }
 @{ 
-    var getVoznje = new Func<Dictionary<string, Voznja>>(() = > (Dictionary<string, Voznja>)Session["Voznje"]);
+    var getVoznje = new Func<Dictionary<string, Voznja>>(() => (Dictionary<string, Voznja>)Session["Voznje"]);
 }
 
 <div>
     <a href="/Taxi/Logout">Logout</a>
+    &nbsp;
     <a href="/Taxi/IzmenaVozac">Izmenite profil</a>
+    &nbsp;
     <a href="/Taxi/PromeniLokaciju">Promena lokacije</a>
+    &nbsp;
     <a href="/Taxi/GoToPromenaStatusaVoznje">Promenite status trenutne voznje</a>
+    &nbsp;
     <a href="/Taxi/GoToProveraVoznjiVozac">Lista voznji na cekanju</a>
 </div>
 
-<h2>Dobrodosli, @(((Korisnik)Session["Ulogovan"]).Ime @(((Korisnik)Session["Ulogovan"]).Prezime </h2>
+<h2 align="center">Dobrodosli, @(((Korisnik)Session["Ulogovan"]).Ime) @(((Korisnik)Session["Ulogovan"]).Prezime) </h2>
 
 @if(ViewBag.broj != 0)
 {
-    <table border="1">
+    <table align="center" border="1">
         <caption>Prikaz voznji</caption>
         <tr>
             <th>

@@ -205,6 +205,9 @@
     <Content Include="Views\Taxi\HomepageAdministrator.cshtml" />
     <Content Include="Views\Taxi\HomepageVozac.cshtml" />
     <Content Include="Views\Taxi\HomepageMusterija.cshtml" />
+    <Content Include="Views\Taxi\IzmenaAdmin.cshtml" />
+    <Content Include="Views\Taxi\IzmenaVozac.cshtml" />
+    <Content Include="Views\Taxi\Izmena.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

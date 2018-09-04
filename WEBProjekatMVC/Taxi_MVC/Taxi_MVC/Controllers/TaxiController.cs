@@ -209,5 +209,12 @@ namespace Taxi_MVC.Controllers
         {
             return View("IzmenaAdmin");
         }
+
+        public ActionResult Odjava()
+        {
+            Session["Ulogovan"] = null;
+            return View("Index");
+        }
+
     }
 }

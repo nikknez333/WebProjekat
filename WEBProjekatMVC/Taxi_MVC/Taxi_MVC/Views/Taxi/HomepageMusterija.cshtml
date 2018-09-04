@@ -5,18 +5,22 @@
 @{ 
     var getVoznje = new Func<Dictionary<string, Voznja>>(() => (Dictionary<string, Voznja>)Session["Voznje"]);
 }
-<div>
+<div align="center">
     <a href="/Taxi/Logout">Logout</a>
+    &nbsp;
     <a href="/Taxi/Izmena">Izmenite profil</a>
+    &nbsp;
     <a href="/Taxi/MusterijaZahtev">Zatrazite voznju</a>
+    &nbsp;
     <a href="/Taxi/Pregledaj">Upravljanje voznjama</a>
+    &nbsp;
     <a href="/Taxi/Pretraga">Pretraga voznji</a>
 </div>
-<h2>Dobrodosli, @(((Korisnik)Session["Ulogovan"]).Ime) @(((Korisnik)Session["Ulogovan"]).Prezime</h2>
+<h2 align="center">Dobrodosli, @(((Korisnik)Session["Ulogovan"]).Ime) @(((Korisnik)Session["Ulogovan"]).Prezime)</h2>
 
-if(@ViewBag.broj != 0)
-{
-    <table border="1">
+    @if (ViewBag.broj != 0)
+    {
+      <table align="center" border="1">
         <caption>Prikaz voznji</caption>
         <tr>
             <th>
@@ -32,9 +36,9 @@ if(@ViewBag.broj != 0)
                 Status
             </th>
         </tr>
-        @foreach(KeyValuePair<string, Voznja> kv in getVoznje())
+        @foreach (KeyValuePair<string, Voznja> kv in getVoznje())
         {
-            if(kv.Value.Musterija.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
+            if (kv.Value.Musterija.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
             {
                 <tr>
                     <td>
@@ -52,9 +56,10 @@ if(@ViewBag.broj != 0)
                 </tr>
             }
         }
-    </table>
+      </table>
+    }
     <br />
-    <form action="/Taxi/FilterMusterija" method="post">
+    <forma text-align="center" action="/Taxi/FilterMusterija" method="post">
         <select name="status">
             <option value="NACEKANJU">
                 Na cekanju
@@ -79,8 +84,8 @@ if(@ViewBag.broj != 0)
             </option>
         </select>
         <input type="submit" value="Filtriraj voznje" />
-    </form>
-    <form action="/Taxi/SortirajMusterije" method="post">
+    </forma>
+    <form text-align="center" action="/Taxi/SortirajMusterije" method="post">
         <select name="sortiranje">
             <option value="datum">
                 Po datumu
@@ -91,4 +96,3 @@ if(@ViewBag.broj != 0)
         </select>
         <input type="submit" value="Sortiraj voznje" />
     </form>
-}

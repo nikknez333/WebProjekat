@@ -1,0 +1,183 @@
+﻿@using Taxi_MVC.Models;
+@{
+    Layout = null;
+}
+
+<form action="/Taxi/IzmeniVozac" method="post">
+    <table border="0">
+        <tr>
+            <td>
+                Korisnicko ime
+            </td>
+            <td>
+                <input type="text" value="@(((Korisnik)Session["Ulogovan"]).KorisnickoIme)" name="KorisnickoIme" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Lozinka
+            </td>
+            <td>
+                <input required type="password" value="@(((Korisnik)Session["Ulogovan"]).Lozinka)" name="Lozinka" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Ime
+            </td>
+            <td>
+                <input type="text" value="@(((Korisnik)Session["Ulogovan"]).Ime)" name="Ime" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Prezime
+            </td>
+            <td>
+                <input type="text" value="@(((Korisnik)Session["Ulogovan"]).Prezime)" name="Prezime" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Pol
+            </td>
+            <td>
+                <select name="Pol">
+                    @if ((((Korisnik)Session["Ulogovan"]).Pol) == EPol.MUSKI)
+                {
+                    <option selected value="MUSKI">
+                        Muski
+                    </option>
+                    <option value="ZENSKI">
+                        Zenski
+                    </option>
+            }
+            else
+            {
+                <option value="MUSKI">
+                    Muski
+                </option>
+                <option selected value="ZENSKI">
+                    Zenski
+                </option>
+        }
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                JMBG
+            </td>
+            <td>
+                <input type="number" value="@(((Korisnik)Session["Ulogovan"]).JMBG)" name="JMBG" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Telefon
+            </td>
+            <td>
+                <input type="number" value="@(((Korisnik)Session["Ulogovan"]).Telefon)" name="Telefon" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="Save" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Godiste automobila
+            </td>
+            <td>
+                <input type="number" value="@(((Vozac)Session["Ulogovan"]).AutoVozac.Godiste)" min="1900" max="2018" name="Godiste" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Registarska oznaka
+            </td>
+            <td>
+               <input type="text" value="@(((Vozac)Session["Ulogovan"]).AutoVozac.RegistarskaOznaka)" name="RegistarskaOznaka" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Broj vozila
+            </td>
+            <td>
+                <input type="number" value="@(((Vozac)Session["Ulogovan"]).AutoVozac.BrojVozila)" name="BrojVozila" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Tip automobila
+            </td>
+            <td>
+                <select name="TipAutomobila">
+                    <option value="PUTNICKI">
+                        Putnicki
+                    </option>
+                    <option value="KOMBI">
+                        Kombi
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                X kordinata
+            </td>
+            <td>
+                <input type="text" value="@(((Vozac)Session["Ulogovan"]).LokVozac.XCoord)" name="Xkordinata" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Y kordinata
+            </td>
+            <td>
+                <input type="text" value="@(((Vozac)Session["Ulogvoan"]).LokVozac.YCoord)" name="Ykordinata" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Ulica
+            </td>
+            <td>
+                <input type="text" value="@(((Vozac)Session["Ulogovan"]).LokVozac.AdresaLok.Ulica)" name="Ulica" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Broj
+            </td>
+            <td>
+                <input type="text" value="@(((Vozac)Session["Ulogovan"]).LokVozac.AdresaLok.Broj)" name="Broj" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Mesto
+            </td>
+            <td>
+                <input type="text" value="@(((Vozac)Session["Ulogovan"]).LokVozac.AdresaLok.Mesto)" name="Mesto" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Pozivni broj
+            </td>
+            <td>
+                <input type="text" value="@(((Vozac)Session["Ulogovan"]).LokVozac.AdresaLok.PozivniBroj)" name="PozivniBroj" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="Save" />
+            </td>
+        </tr>
+    </table>
+</form>
+
