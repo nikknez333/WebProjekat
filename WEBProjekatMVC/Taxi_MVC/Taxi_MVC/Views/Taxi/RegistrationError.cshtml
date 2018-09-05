@@ -54,24 +54,32 @@
             <td>
                 <select name="Pol">
                     @if (ViewBag.korisnik.Pol == EPol.MUSKI)
-                    {
-                        <option selected value="MUSKI">
-                                Muski
-                        </option>
-                        <option value="ZENSKI">
-                                Zenski
-                        </option>
-                    }
-                    else
-                    {
-                        <option value="MUSKI">
-                                Muski
-                        </option>
-                        <option selected value="ZENSKI">
-                                Zenski
-                        </option>
-                    }
+                {
+                    <option selected value="MUSKI">
+                        Muski
+                    </option>
+                    <option value="ZENSKI">
+                        Zenski
+                    </option>
+            }
+            else
+            {
+                <option value="MUSKI">
+                    Muski
+                </option>
+                <option selected value="ZENSKI">
+                    Zenski
+                </option>
+        }
                 </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Email
+            </td>
+            <td>
+                <input type="email" value="@ViewBag.korisnik.Email" name="Email" />
             </td>
         </tr>
         <tr>
@@ -79,7 +87,7 @@
                 JMBG
             </td>
             <td>
-                <input type="text" name="JMBG" value="@ViewBag.korisnik.JMBG"/>
+                <input type="text" name="JMBG" value="@ViewBag.korisnik.JMBG" />
             </td>
         </tr>
         <tr>

@@ -1,0 +1,123 @@
+﻿@using Taxi_MVC.Models
+@{
+    Layout = null;
+}
+
+<div>
+    <a href="/Taxi/GoToHome">Povratak na pocetnu stranicu</a>
+</div>
+@if (ViewBag.broj != 0)
+{
+    <table border="1">
+        <tr>
+            <th>
+                Vasa lokacija
+            </th>
+            <th>
+                Vreme porudzbine
+            </th>
+            <th>
+                Opcije
+            </th>
+        </tr>
+        @foreach (KeyValuePair<string, Voznja> kv in ViewBag.voznje)
+        {
+            if (kv.Value.StatusVoznje == EStatus.KREIRANA)
+            {
+                <tr>
+                    <td>
+                        @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Ulica
+                    </td>
+                    <td>
+                        @kv.Key
+                    </td>
+                    <td align="center">
+                        <form action="/Taxi/Otkazivanje" method="post">
+                            <input type="hidden" value="@kv.Key" name="date" />
+                            <input type="submit" value="Otkazi" />
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/Taxi/IzmeniVoznju" method="post">
+                            <input type="hidden" value="@kv.Key" name="date" />
+                            <input type="submit" value="Izmeni" />
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/Taxi/PrikaziVoznju" method="post">
+                            <input type="hidden" value="@kv.Key" name="date" />
+                            <input type="submit" value="Prikazi" />
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        }
+        @foreach (KeyValuePair<string, Voznja> kv in ViewBag.voznje)
+        {
+            if (kv.Value.StatusVoznje == EStatus.USPESNA && kv.Value.KomentarNaVoznje.Opis.IsEmpty())
+            {
+                <tr>
+                    <td>
+                        @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Ulica
+                    </td>
+                    <td>
+                        @kv.Key
+                    </td>
+                    <td align="center">
+                        <form action="/Taxi/OstavljanjeKomentara" method="post">
+                            <input type="hidden" value="@kv.Key" name="date" />
+                            <input type="submit" value="Potvrdi" />
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/Taxi/PrikaziVoznju" method="post">
+                            <input type="hidden" value="@kv.Key" name="date" />
+                            <input type="submit" value="Otkazi" />
+                        </form>
+                    </td>
+                </tr>
+            }
+            else if (kv.Value.StatusVoznje == EStatus.USPESNA && !kv.Value.KomentarNaVoznje.Opis.IsEmpty())
+            {
+                <tr>
+                    <td>
+                        @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Ulica
+                    </td>
+                    <td>
+                        @kv.Key
+                    </td>
+                    <td align="center">
+                        <form action="/Taxi/PrikaziVoznju" method="post">
+                            <input type="hidden" value="@kv.Key" name="date" />
+                            <input type="submit" value="Prikazi" />
+                        </form>
+                    </td>
+                </tr>
+            }
+            else if (kv.Value.StatusVoznje != EStatus.USPESNA && kv.Value.StatusVoznje != EStatus.KREIRANA)
+            {
+                <tr>
+                    <td>
+                        @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Ulica
+                    </td>
+                    <td>
+                        @kv.Key
+                    </td>
+                    <td align="center">
+                        <form action="/Taxi/PrikaziVoznju" method="post">
+                            <input type="hidden" value="@kv.Key" name="date" />
+                            <input type="submit" value="Prikazi" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+        
+    </table>
+    }
+    else
+    {
+        <h2>Nijedna voznja ne odgovara zadatom kriterijumu</h2>
+    }
+}

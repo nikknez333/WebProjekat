@@ -1,0 +1,229 @@
+﻿@using Taxi_MVC.Models
+@{
+    Layout = null;
+}
+
+<table border="1">
+    <tr>
+        <td>
+            Vozac
+        </td>
+        <td>
+            @ViewBag.voznja.vozac.KorisnickoIme
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            Polazak
+        </td>
+    </tr>
+    <tr>
+        <td>
+            X koordinata
+        </td>
+        <td>
+            @ViewBag.voznja.LokacijaDolaskaTaxi.XCoord
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Y koordinata
+        </td>
+        <td>
+            @ViewBag.voznja.LokacijaDolaskaTaxi.YCoord
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Ulica
+        </td>
+        <td>
+            @ViewBag.voznja.LokacijaDolaskaTaxi.Ulica
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Broj
+        </td>
+        <td>
+            @ViewBag.voznja.LokacijaDolaskaTaxi.Broj
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Mesto
+        </td>
+        <td>
+            @ViewBag.voznja.LokacijaDolaskaTaxi.Mesto
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Pozivni broj
+        </td>
+        <td>
+            @ViewBag.voznja.LokacijaDolaskaTaxi.PozivniBroj
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            Destinacija
+        </td>
+    </tr>
+    <tr>
+        <td>
+            X koordinata
+        </td>
+        <td>
+            @try
+            {
+                @ViewBag.voznja.Odrediste.XCoord
+            }
+            catch { }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Y koordinata
+        </td>
+        <td>
+            @try
+            {
+                @ViewBag.voznja.Odrediste.YCoord
+            }
+            catch { }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Ulica
+        </td>
+        <td>
+            @try
+            {
+                @ViewBag.voznja.Odrediste.Ulica
+            }
+            catch { }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Broj
+        </td>
+        <td>
+            @try
+            {
+                @ViewBag.voznja.Odrediste.Broj
+            }
+            catch { }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Mesto
+        </td>
+        <td>
+            @try
+            {
+                @ViewBag.voznja.Odrediste.Mesto
+            }
+            catch { }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Pozivni broj
+        </td>
+        <td>
+            @try
+            {
+                @ViewBag.voznja.Odrediste.PozivniBroj
+            }
+            catch { }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Tip automobila
+        </td>
+        <td>
+            @ViewBag.voznja.ZeljeniTipAuto
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Komentar ostavio
+        </td>
+        <td>
+            @try
+            {
+                if(ViewBag.voznja.KomentarNaVoznju.OstavioKorisnik.KorisnickoIme != null)
+                {
+                    @ViewBag.voznja.KomentarNaVoznju.OstavioKorisnik.KorisnickoIme
+                }
+            }
+            catch { }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Ocena
+        </td>
+        <td>
+            @try
+            {
+                if(ViewBag.voznja.KomentarNaVoznju.Ocena != null)
+                {
+                    @ViewBag.voznja.KomentarNaVoznju.Ocena
+                }
+            }
+            catch { }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Komentar
+        </td>
+        <td>
+            @try
+            {
+                if(ViewBag.voznja.KomentarNaVoznju.Opis != null)
+                {
+                    @ViewBag.voznja.KomentarNaVoznju.Opis
+                }
+            }
+            catch { }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Datum objave
+        </td>
+        <td>
+            @try
+            {
+                if(ViewBag.voznja.KomentarNaVoznju.DatumObjave != null)
+                {
+                    @ViewBag.voznja.KomentarNaVoznju.DatumObjave
+                }
+            }
+            catch { }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Iznos
+        </td>
+        <td>
+            @try
+            {
+                if(ViewBag.voznja.Iznos != null)
+                {
+                    @ViewBag.voznja.Iznos
+                }
+            }
+            catch { }
+        </td>
+    </tr>
+</table>
+

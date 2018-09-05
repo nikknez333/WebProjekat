@@ -42,8 +42,8 @@
                 Pol
             </td>
             <td>
-                <select name ="Pol">
-                @if ((((Korisnik)Session["Ulogovan"]).Pol) == EPol.MUSKI)
+                <select name="Pol">
+                    @if ((((Korisnik)Session["Ulogovan"]).Pol) == EPol.MUSKI)
                 {
                     <option selected value="MUSKI">
                         Muski
@@ -51,17 +51,25 @@
                     <option value="ZENSKI">
                         Zenski
                     </option>
-                }
-                else
-                {
-                    <option value="MUSKI">
-                        Muski
-                    </option>
-                    <option selected value="ZENSKI">
-                        Zenski
-                    </option>
-                }
+            }
+            else
+            {
+                <option value="MUSKI">
+                    Muski
+                </option>
+                <option selected value="ZENSKI">
+                    Zenski
+                </option>
+        }
                 </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Email
+            </td>
+            <td>
+                <input type="email" value="@(((Korisnik)Session["Ulogovan"]).Email)" name="Email" />
             </td>
         </tr>
         <tr>

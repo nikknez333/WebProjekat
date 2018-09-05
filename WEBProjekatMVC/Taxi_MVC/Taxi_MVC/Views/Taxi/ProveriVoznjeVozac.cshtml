@@ -1,0 +1,58 @@
+﻿@using Taxi_MVC.Models;
+@{
+    Layout = null;
+}
+<div>
+    <a href="/Taxi/GoToHomeVozac">Povratak na pocetnu stranicu</a>
+</div>
+
+<table border="1">
+    <tr>
+        <th>
+            Vreme kreiranje porudzbine
+        </th>
+        <th>
+            Opcije
+        </th>
+    </tr>
+    @foreach(KeyValuePair<string,Voznja> kv in ViewBag.voznje)
+    {
+        if (kv.Value.StatusVoznje == EStatus.KREIRANA && ViewBag.tip == kv.Value.ZeljeniTipAuto)
+        {
+            <tr>
+                <td>
+                    @kv.Value.DatumVremePorudzbine
+                </td>
+                <td>
+                    <form action="/Taxi/DodeliVoznjuVozac" method="post">
+                        <input type="hidden" value="@kv.Key" name="date" />
+                        <input type="submit" value="Preuzmi" />
+                    </form>
+                </td>
+            </tr>
+        }
+        else if(kv.Value.StatusVoznje == EStatus.KREIRANA && kv.Value.ZeljeniTipAuto == ETipAutomobila.NEOZNACEN)
+        {
+            <tr>
+                <td>
+                    @kv.Value.DatumVremePorudzbine
+                </td>
+                <td>
+                    <form action="/Taxi/DodeliVoznjuVozac" method="post">
+                        <input type="hidden" value="@kv.Key" name="date" />
+                        <input type="submit" value="Preuzmi" />
+                    </form>
+                </td>
+            </tr>
+        }
+        else if(kv.Value.StatusVoznje == EStatus.KREIRANA)
+        {
+            <tr>
+                <td>
+                    @kv.Value.DatumVremePorudzbine
+                </td>
+            </tr>
+        }
+    }
+</table>
+

@@ -408,6 +408,460 @@ namespace Taxi_MVC.Controllers
             return View("PregledSvihVoznjiMusterije");
         }
 
+        public ActionResult Otkazivanje(string date)
+        {
+            bool test = false;
+            if(getVoznje[date].StatusVoznje == EStatus.KREIRANA)
+            {
+                getVoznje[date].StatusVoznje = EStatus.OTKAZANA;
+                test = true;
+            }
+            if(test)
+            {
+                ViewBag.voznja = getVoznje[date];
+                return View("Komentar");
+            }
+            else
+            {
+                return View("OtkazivanjeError");
+            }
+        }
+
+        public ActionResult GoToHome()
+        {
+            int i = 0;
+            foreach(KeyValuePair<string,Voznja> kv in getVoznje)
+            {
+                if(kv.Value.Musterija.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
+                {
+                    i++;
+                }
+            }
+            ViewBag.broj = i;
+            return View("HomepageMusterija");
+        }
+
+        public ActionResult GoToHomeAdmin()
+        {
+            int i = 0;
+            foreach(KeyValuePair<string,Voznja> kv in getVoznje)
+            {
+                try
+                {
+                    if(kv.Value.Dispecer.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
+                    {
+                        i++;
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+            ViewBag.broj = i;
+            return View("HomepageAdministrator");
+        }
+
+        public ActionResult GoToHomeVozac()
+        {
+            int i = 0;
+            foreach(KeyValuePair<string,Voznja> kv in getVoznje)
+            {
+                try
+                {
+                    if(kv.Value.Vozac.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
+                    {
+                        i++;
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+            ViewBag.broj = i;
+            return View("HomepageVozac");
+        }
+        
+        [HttpPost]
+        public ActionResult IzmeniVoznju(string date)
+        {
+            ViewBag.voznja = getVoznje[date];
+            return View("IzmenaVoznje");
+        }
+
+        [HttpPost]
+        public ActionResult IzmenaVoznje(Lokacija lok, Adresa adr, ETipAutomobila tip, string date)
+        {
+            bool test = false;
+            if(getVoznje[date].StatusVoznje == EStatus.KREIRANA)
+            {
+                lok.AdresaLok = adr;
+                Voznja v = new Voznja();
+                v.LokacijaDolaskaTaxi = lok;
+                v.DatumVremePorudzbine = DateTime.Parse(date);
+                if(!tip.Equals(""))
+                {
+                    v.ZeljeniTipAuto = tip;
+                }
+                v.StatusVoznje = EStatus.KREIRANA;
+                v.Musterija = (Korisnik)Session["Ulogovan"];
+                getVoznje[date] = v;
+                test = true;
+            }
+
+            if (test)
+                return View("PregledSvihVoznjiMusterija");
+            else
+                return View("OtkazivanjeError");
+        }
+        [HttpPost]
+        public ActionResult Komentarisi(int ocena, string date, string komentar)
+        {
+            getVoznje[date].KomentarNaVoznje = new Komentar();
+            getVoznje[date].KomentarNaVoznje.DatumObjave = DateTime.Now;
+            getVoznje[date].KomentarNaVoznje.Opis = komentar;
+            getVoznje[date].KomentarNaVoznje.OstavljenoZaVoznju = getVoznje[date];
+            getVoznje[date].KomentarNaVoznje.Ocena = ocena;
+
+            try
+            {
+                getVoznje[date].KomentarNaVoznje.OstavioKorisnik = (Vozac)Session["Ulogovan"];
+                int i = 0;
+                foreach(KeyValuePair<string,Voznja> kv in getVoznje)
+                {
+                    try
+                    {
+                        if(kv.Value.Vozac.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
+                        {
+                            i++;
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                ViewBag.broj = i;
+                return View("HomepageVozac");
+            }
+            catch
+            {
+                getVoznje[date].KomentarNaVoznje.OstavioKorisnik = (Korisnik)Session["Ulogovan"];
+                return View("PregledSvihVoznjiMusterija");
+            }
+        }
+        [HttpPost]
+        public ActionResult OstavljanjeKomentara(string date)
+        {
+            ViewBag.voznja = getVoznje[date];
+            return View("Komentar");
+        }
+
+        [HttpPost]
+        public ActionResult PrikaziVoznju(string date)
+        {
+            ViewBag.voznja = getVoznje[date];
+            return View("PrikazVoznje");
+        }
+        
+        public ActionResult GoToKreiranjeVoznje()
+        {
+            ViewBag.vozaci = getVozaci;
+            return View("KreirajVoznju");
+        }
+
+        public ActionResult KreirajVoznju(Lokacija lok, Adresa adr, ETipAutomobila tip, string vozac)        
+        {
+            lok.AdresaLok = adr;
+            Voznja v = new Voznja();
+            v.LokacijaDolaskaTaxi = lok;
+            v.DatumVremePorudzbine = DateTime.Now;
+            v.ZeljeniTipAuto = tip;
+            v.StatusVoznje = EStatus.FORMIRANA;
+            v.Dispecer = (Korisnik)Session["Ulogovan"];
+            v.Vozac = getVozaci[vozac];
+            getVozaci[vozac].Zauzet = true;
+            v.KomentarNaVoznje = new Komentar();
+            v.KomentarNaVoznje.OstavioKorisnik = new Korisnik();
+            v.Musterija = new Korisnik();
+            v.Musterija.KorisnickoIme = "";
+            getVoznje.Add(v.DatumVremePorudzbine.ToString(), v);
+            return View("HomepageAdministrator");
+        }
+
+        public ActionResult GoToProveraVoznji()
+        {
+            ViewBag.voznje = getVoznje;
+            return View("ProveriVoznje");
+        }
+        [HttpPost]
+        public ActionResult DodeliVoznju(string date)
+        {
+            getVoznje[date].Dispecer = (Korisnik)Session["Ulogovan"];
+            ViewBag.voznja = getVoznje[date].DatumVremePorudzbine.ToString();
+            ViewBag.vozaci = getVozaci;
+            ViewBag.auto = getVoznje[date].ZeljeniTipAuto;
+            return View("DodeliVozacaVoznji");
+        }
+        [HttpPost]
+        public ActionResult DodelaVozacaVoznji(string vozac, string date)
+        {
+            getVozaci[vozac].Zauzet = true;
+            getVoznje[date].Vozac = getVozaci[vozac];
+            getVoznje[date].StatusVoznje = EStatus.OBRADJENA;
+            return View("HomepageAdministrator");
+        }
+
+        public ActionResult GoToProveraVoznjiVozac()
+        {
+            if(((Vozac)Session["Ulogovan"]).Zauzet)
+            {
+                return View("VozacPreuzimaError");
+            }
+            ViewBag.voznje = getVoznje;
+            ViewBag.tip = ((Vozac)Session["Ulogovan"]).AutoVozac.TipAutomobila;
+            return View("ProveriVoznjeVozac");
+        }
+        [HttpPost]
+        public ActionResult DodeliVoznjuVozac(string date)
+        {
+            getVoznje[date].Vozac = (Vozac)Session["Ulogovan"];
+            getVozaci[((Vozac)Session["Ulogovan"]).KorisnickoIme].Zauzet = true;
+            getVoznje[date].StatusVoznje = EStatus.PRIHVACENA;
+            int i = 0;
+            foreach(KeyValuePair<string,Voznja> kv in getVoznje)
+            {
+                try
+                {
+                    if(kv.Value.Vozac.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
+                    {
+                        i++;
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+            ViewBag.broj = i;
+            return View("HomepageVozac");
+        }
+
+        public ActionResult GoToPromenaStatusaVoznje()
+        {
+            if (((Vozac)Session["Ulogovan"]).Zauzet)
+                return View("PromeniStatusVoznje");
+            return View("PromeniStatusVoznjeError");
+        }
+
+        [HttpPost]
+        public ActionResult PromenaStatusaVoznje(EStatus status)
+        {
+            foreach(KeyValuePair<string,Voznja> kv in getVoznje)
+            {
+                if(kv.Value.Vozac.KorisnickoIme != null)
+                {
+                    if(kv.Value.Vozac.KorisnickoIme.Equals(((Vozac)Session["Ulogovan"]).KorisnickoIme) && !(kv.Value.StatusVoznje == EStatus.USPESNA || kv.Value.StatusVoznje == EStatus.NEUSPESNA))
+                    {
+                        ((Vozac)Session["Ulogovan"]).Zauzet = false;
+                        if(status == EStatus.NEUSPESNA)
+                        {
+                            kv.Value.StatusVoznje = status;
+                            ViewBag.voznja = kv.Value;
+                            return View("Komentar");
+                        }
+                        else
+                        {
+                            return View("OdredistreUnos");
+                        }
+                    }
+                }
+            }
+            int i = 0;
+            foreach(KeyValuePair<string, Voznja> kv in getVoznje)
+            {
+                try
+                {
+                    if(kv.Value.Vozac.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
+                    {
+                        i++;
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+            ViewBag.broj = i;
+            return View("HomepageVozac");
+
+        }
+
+        [HttpPost]
+        public ActionResult OdredisteIznos(Lokacija lok, Adresa adr, double cena)
+        {
+            lok.AdresaLok = adr;
+            foreach(KeyValuePair<string,Voznja> kv in getVoznje)
+            {
+                if(kv.Value.Vozac.KorisnickoIme != null)
+                {
+                    if(kv.Value.Vozac.KorisnickoIme.Equals(((Vozac)Session["Ulogovan"]).KorisnickoIme) && (kv.Value.StatusVoznje == EStatus.PRIHVACENA || kv.Value.StatusVoznje == EStatus.OBRADJENA || kv.Value.StatusVoznje == EStatus.FORMIRANA ))
+                    {
+                        kv.Value.StatusVoznje = EStatus.USPESNA;
+                        kv.Value.Odrediste = lok;
+                        kv.Value.Iznos = cena;
+                        break;
+                    }
+                }
+            }
+
+            return View("HomepageVozac");
+        }
+
+        public ActionResult GoToSveVoznje()
+        {
+            ViewBag.voznje = getVoznje;
+            return View("IzlistajSveVoznje");
+        }
+        
+        public ActionResult FilterMusterija(EStatus status)
+        {
+            Dictionary<string, Voznja> voznje = new Dictionary<string, Voznja>();
+            foreach(KeyValuePair<string,Voznja> kv in getVoznje)
+            {
+                try
+                {
+                    if(kv.Value.StatusVoznje == status && kv.Value.Musterija.KorisnickoIme.Equals(((Korisnik)Session["Ulogovan"]).KorisnickoIme))
+                    {
+                        voznje.Add(kv.Key, kv.Value);
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+
+            ViewBag.voznje = voznje;
+            ViewBag.broj = voznje.Count();
+            return View("Filtrirano");
+        }
+
+        public ActionResult SortiranjeMusterija(string sortiranje)
+        {
+            Dictionary<string, Voznja> voznje = new Dictionary<string, Voznja>();
+            if(sortiranje.Equals("ocena"))
+            {
+                voznje = getVoznje.ToList().OrderByDescending(o => o.Value.KomentarNaVoznje.Ocena).ToDictionary(x => x.Key, y => y.Value);
+            }
+            else
+            {
+                voznje = getVoznje.ToList().OrderByDescending(o => o.Value.DatumVremePorudzbine).ToDictionary(x => x.Key, y => y.Value);
+            }
+
+            ViewBag.voznje = voznje;
+            ViewBag.broj = voznje.Count();
+            return View("Filtrirano");
+        }
+
+        public ActionResult Pretraga()
+        {
+            return View("Pretraga");
+        }
+
+        [HttpPost]
+        public ActionResult PretragaParametri(int ocena1, int ocena2, int cena1, int cena2, DateTime? datum1 = null, DateTime? datum2 = null)
+        {
+            Dictionary<string, Voznja> voznje = new Dictionary<string, Voznja>(getVoznje);
+            foreach(KeyValuePair<string,Voznja> kv in getVoznje)
+            {
+                try
+                {
+                    if(kv.Value.Musterija.KorisnickoIme.Equals(((Korisnik)Session["Ulogovan"]).KorisnickoIme))
+                    {
+                        if(datum1 == null && datum2 != null && datum2.Value.Date < kv.Value.DatumVremePorudzbine.Date)
+                        {
+                            voznje.Remove(kv.Key);
+                        }
+                        else if(datum1 != null && datum2 == null && datum1.Value.Date > kv.Value.DatumVremePorudzbine.Date)
+                        {
+                            voznje.Remove(kv.Key);
+                        }
+                        else if(datum1 != null && datum2 != null && (datum1.Value.Date > kv.Value.DatumVremePorudzbine.Date || datum2.Value.Date < kv.Value.DatumVremePorudzbine.Date))
+                        {
+                            voznje.Remove(kv.Key);
+                        }
+                        if(ocena1 == 0 && ocena2 != 0 && ocena2 < kv.Value.KomentarNaVoznje.Ocena)
+                        {
+                            voznje.Remove(kv.Key);
+                        }
+                        else if(ocena1 != 0 && ocena2 == 0 && ocena1 > kv.Value.KomentarNaVoznje.Ocena)
+                        {
+                            voznje.Remove(kv.Key);
+                        }
+                        else if(ocena1 != 0 && ocena2 != 0 && (ocena1 > kv.Value.KomentarNaVoznje.Ocena || ocena2 < kv.Value.KomentarNaVoznje.Ocena))
+                        {
+                            voznje.Remove(kv.Key);
+                        }
+                        if(cena1 == 0 && cena2 != 0 && cena2 < kv.Value.Iznos)
+                        {
+                            voznje.Remove(kv.Key);
+                        }
+                        else if(cena1 != 0 && cena2 == 0 && cena1 > kv.Value.Iznos)
+                        {
+                            voznje.Remove(kv.Key);
+                        }
+                        else if(cena1 != 0 && cena2 != 0 && (cena1 > kv.Value.Iznos || cena2 < kv.Value.Iznos))
+                        {
+                            voznje.Remove(kv.Key);
+                        }
+
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+            ViewBag.voznje = voznje;
+            ViewBag.broj = voznje.Count();
+            return View("Filtrirano");
+        }
+
+        public ActionResult PretragaAdmin()
+        {
+            return View("PretragaAdmin");
+        }
+
+        [HttpPost]
+        public ActionResult PretragaParametriAdmin(string vozacIme, string vozacPrezime, string musterijaIme, string musterijaPrezime)        
+        {
+            if (vozacIme == null)
+                vozacIme = "";
+            if (vozacPrezime == null)
+                vozacPrezime = "";
+            if (musterijaIme == null)
+                musterijaIme = "";
+            if (musterijaPrezime == null)
+                musterijaPrezime = "";
+
+            Dictionary<string, Voznja> voznje = new Dictionary<string, Voznja>();
+            foreach(KeyValuePair<string,Voznja> kv in getVoznje)
+            {
+                try
+                {
+                    if(kv.Value.Vozac.Ime.Equals(vozacIme) || kv.Value.Vozac.Prezime.Equals(vozacPrezime) || kv.Value.Musterija.Ime.Equals(musterijaIme) || kv.Value.Musterija.Prezime.Equals(musterijaPrezime))
+                    {
+                        voznje.Add(kv.Key, kv.Value);
+                    }
+                }
+                catch { }
+            }
+            ViewBag.voznje = voznje;
+            ViewBag.broj = voznje.Count();
+            return View("FiltriranoAdmin");
+        }
 
     }
 }

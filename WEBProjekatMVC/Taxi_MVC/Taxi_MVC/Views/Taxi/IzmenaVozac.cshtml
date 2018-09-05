@@ -67,6 +67,14 @@
         </tr>
         <tr>
             <td>
+                Email
+            </td>
+            <td>
+                <input type="email" value="@(((Korisnik)Session["Ulogovan"]).Email)" name="Email" />
+            </td>
+        </tr>
+        <tr>
+            <td>
                 JMBG
             </td>
             <td>
@@ -99,7 +107,7 @@
                 Registarska oznaka
             </td>
             <td>
-               <input type="text" value="@(((Vozac)Session["Ulogovan"]).AutoVozac.RegistarskaOznaka)" name="RegistarskaOznaka" />
+                <input type="text" value="@(((Vozac)Session["Ulogovan"]).AutoVozac.RegistarskaOznaka)" name="RegistarskaOznaka" />
             </td>
         </tr>
         <tr>

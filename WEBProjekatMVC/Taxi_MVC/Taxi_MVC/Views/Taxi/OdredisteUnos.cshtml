@@ -2,17 +2,16 @@
 @{
     Layout = null;
 }
-<div>
-    <a href="/Taxi/GoToHome">Povratak na pocetnu stranicu</a>
-</div>
-<form action="/Taxi/KreiranjeVoznje" method="post">
+
+
+<form action="/Taxi/OdredisteIznos" method="post">
     <table border="0">
         <tr>
             <td>
-                X kooridnata
+                X koordinata
             </td>
             <td>
-                <input type="number" name="XCoord" />
+                <input type="number" name="XCoord">
             </td>
         </tr>
         <tr>
@@ -20,7 +19,7 @@
                 Y koordinata
             </td>
             <td>
-                <input type="number" name="YCoord" />
+                <input type="number" name="YCoord">
             </td>
         </tr>
         <tr>
@@ -28,7 +27,7 @@
                 Ulica
             </td>
             <td>
-                <input type="text" name="Ulica" />
+                <input type="text" name="Ulica">
             </td>
         </tr>
         <tr>
@@ -36,7 +35,7 @@
                 Broj
             </td>
             <td>
-                <input type="number" name="Broj" />
+                <input type="number" name="Broj">
             </td>
         </tr>
         <tr>
@@ -44,7 +43,7 @@
                 Mesto
             </td>
             <td>
-                <input type="text" name="Mesto" />
+                <input type="text" name="Mesto">
             </td>
         </tr>
         <tr>
@@ -52,30 +51,20 @@
                 Pozivni broj
             </td>
             <td>
-                <input type="number" name="PozivniBroj" />
+                <input type="number" name="PozivniBroj">
             </td>
         </tr>
         <tr>
             <td>
-                Tip automobila
+                Iznos
             </td>
             <td>
-                <select name="tip">
-                    <option value="NEOZNACEN">
-
-                    </option>
-                    <option value="PUTNICKI">
-                        Putnicki
-                    </option>
-                    <option value="KOMBI">
-                        Kombi
-                    </option>
-                </select>
+                <input type="number" name="cena">
             </td>
         </tr>
         <tr>
             <td colspan="2" align="center">
-                <input type="submit" value="Posalji" />
+                <input type="submit" value="Unesi"/>
             </td>
         </tr>
     </table>

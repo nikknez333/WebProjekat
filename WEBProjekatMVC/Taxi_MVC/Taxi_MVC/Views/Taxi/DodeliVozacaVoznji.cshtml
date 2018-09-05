@@ -1,0 +1,29 @@
+﻿@using Taxi_MVC.Models
+@{
+    Layout = null;
+}
+
+<form action="/Taxi/DodelaVozacaVoznji" method="post">
+    <table border="0">
+        <tr>
+            <td>
+                <select name="vozac">
+                    @foreach(KeyValuePair<string,Vozac> kv in ViewBag.vozaci)
+                    {
+                        if(!kv.Value.Zauzet && (kv.Value.AutoVozac.TipAutomobila == ViewBag.auto || ViewBag.auto == ETipAutomobila.NEOZNACEN))
+                        {
+                            <option value="@kv.Key">@kv.Key</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="hidden" value="@ViewBag.voznja" name="date" />
+                <input type="submit" value="Dodeli" />
+            </td>
+        </tr>
+    </table>
+</form>
+

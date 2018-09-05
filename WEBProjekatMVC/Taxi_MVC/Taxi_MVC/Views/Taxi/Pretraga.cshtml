@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+}
+
+<form action="/Taxi/PretragaParametri" method="post">
+    <table border="1">
+        <tr>
+            <td>
+                Pretraga po oceni
+            </td>
+            <td>
+                <input type="number" min="0" max="5" name="ocena1" />
+            </td>
+            <td>
+                <input type="number" min="0" max="5" name="ocena2" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Pretraga po ceni
+            </td>
+            <td>
+                <input type="number" min="0" value="0" name="cena1" />
+            </td>
+            <td>
+                <input type="number" min="0" value="0" name="cena2" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Pretraga po datumu
+            </td>
+            <td>
+                <input type="date" name="datum1" />
+            </td>
+            <td>
+                <input type="date" name="datum2" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="Pretrazi" />
+            </td>
+        </tr>
+    </table>
+</form>
+

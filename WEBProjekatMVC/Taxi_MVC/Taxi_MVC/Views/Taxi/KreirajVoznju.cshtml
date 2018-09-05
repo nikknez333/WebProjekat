@@ -1,15 +1,16 @@
-﻿
+﻿@using Taxi_MVC.Models;
 @{
     Layout = null;
 }
+
 <div>
-    <a href="/Taxi/GoToHome">Povratak na pocetnu stranicu</a>
+    <a href="/Taxi/GoToHomeAdmin">Pocetak na pocetnu stranicu</a>
 </div>
-<form action="/Taxi/KreiranjeVoznje" method="post">
+<form action="/Taxi/KreirajVoznju" method="post">
     <table border="0">
         <tr>
             <td>
-                X kooridnata
+                X koordinata
             </td>
             <td>
                 <input type="number" name="XCoord" />
@@ -74,10 +75,25 @@
             </td>
         </tr>
         <tr>
+            <td>
+                Vozac
+            </td>
+            <td>
+                <select name="vozac">
+                    @foreach(KeyValuePair<string,Vozac> kv in ViewBag.vozaci)
+                    {
+                        if(!kv.Value.Zauzet)
+                        {
+                            <option value="@kv.Key">@kv.Key</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td colspan="2" align="center">
-                <input type="submit" value="Posalji" />
+                <input type="submit" value="Kreiraj" />
             </td>
         </tr>
     </table>
 </form>
-
