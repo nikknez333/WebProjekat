@@ -2,69 +2,72 @@
 @{
     Layout = null;
 }
-@{ 
-    var getVoznje = new Func<Dictionary<string, Voznja>>(() => (Dictionary<string, Voznja>)Session["Voznje"]);
-}
+<head>
+    @{
+        var getVoznje = new Func<Dictionary<string, Voznja>>(() => (Dictionary<string, Voznja>)Session["Voznje"]);
+    }
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body style="background-image:url(https://static.superiorwallpapers.com/images/lthumbs/2015-05/7926_Yellow-taxi-from-New-York-City.jpg); background-repeat: no-repeat; background-size: cover">
+    <div>
+        <a href="/Taxi/Logout" class="w3-bar-item w3-button w3-right w3-text-white">Logout</a>
+        &nbsp;
+        <a href="/Taxi/IzmenaVozac" class="w3-bar-item w3-button w3-right w3-text-white">Izmenite profil</a>
+        &nbsp;
+        <a href="/Taxi/PromeniLokaciju" class="w3-bar-item w3-button w3-right w3-text-white">Promena lokacije</a>
+        &nbsp;
+        <a href="/Taxi/GoToPromenaStatusaVoznje" class="w3-bar-item w3-button w3-right w3-text-white">Promenite status trenutne voznje</a>
+        &nbsp;
+        <a href="/Taxi/GoToProveraVoznjiVozac class="w3-bar-item w3-button w3-right w3-text-white"">Lista voznji na cekanju</a>
+    </div>
 
-<div>
-    <a href="/Taxi/Logout">Logout</a>
-    &nbsp;
-    <a href="/Taxi/IzmenaVozac">Izmenite profil</a>
-    &nbsp;
-    <a href="/Taxi/PromeniLokaciju">Promena lokacije</a>
-    &nbsp;
-    <a href="/Taxi/GoToPromenaStatusaVoznje">Promenite status trenutne voznje</a>
-    &nbsp;
-    <a href="/Taxi/GoToProveraVoznjiVozac">Lista voznji na cekanju</a>
-</div>
+    <h2  class="w3-text-white w3-center">Dobrodosli, @(((Korisnik)Session["Ulogovan"]).Ime) @(((Korisnik)Session["Ulogovan"]).Prezime) </h2>
 
-<h2 align="center">Dobrodosli, @(((Korisnik)Session["Ulogovan"]).Ime) @(((Korisnik)Session["Ulogovan"]).Prezime) </h2>
-
-@if(ViewBag.broj != 0)
-{
-    <table align="center" border="1">
-        <caption>Prikaz voznji</caption>
-        <tr>
-            <th>
-                Ulica
-            </th>
-            <th>
-                Broj
-            </th>
-            <th>
-                Vreme porudzbine
-            </th>
-            <th>
-                Status
-            </th>
-        </tr>
-        @foreach(KeyValuePair<string,Voznja> kv in getVoznje())
-        {
-            try
+    @if (ViewBag.broj != 0)
+    {
+        <table align="center" border="1">
+            <caption>Prikaz voznji</caption>
+            <tr>
+                <th>
+                    Ulica
+                </th>
+                <th>
+                    Broj
+                </th>
+                <th>
+                    Vreme porudzbine
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+            @foreach (KeyValuePair<string, Voznja> kv in getVoznje())
             {
-                if(kv.Value.Vozac.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
+                try
                 {
-                    <tr>
-                        <td>
-                            @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Ulica
-                        </td>
-                        <td>
-                            @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Broj
-                        </td>
-                        <td>
-                            @kv.Key
-                        </td>
-                        <td>
-                            @kv.Value.StatusVoznje
-                        </td>
-                    </tr>
+                    if (kv.Value.Vozac.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
+                    {
+                        <tr>
+                            <td>
+                                @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Ulica
+                            </td>
+                            <td>
+                                @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Broj
+                            </td>
+                            <td>
+                                @kv.Key
+                            </td>
+                            <td>
+                                @kv.Value.StatusVoznje
+                            </td>
+                        </tr>
+                    }
+                }
+                catch
+                {
+
                 }
             }
-            catch
-            {
-
-            }
-        }
-    </table>
-}
-
+        </table>
+    }
+</body>

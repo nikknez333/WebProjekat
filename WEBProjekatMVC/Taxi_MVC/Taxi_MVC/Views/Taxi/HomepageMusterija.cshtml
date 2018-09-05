@@ -2,61 +2,65 @@
 @{
     Layout = null;
 }
-@{ 
-    var getVoznje = new Func<Dictionary<string, Voznja>>(() => (Dictionary<string, Voznja>)Session["Voznje"]);
-}
-<div align="center">
-    <a href="/Taxi/Logout">Logout</a>
-    &nbsp;
-    <a href="/Taxi/Izmena">Izmenite profil</a>
-    &nbsp;
-    <a href="/Taxi/MusterijaZahtev">Zatrazite voznju</a>
-    &nbsp;
-    <a href="/Taxi/Pregledaj">Upravljanje voznjama</a>
-    &nbsp;
-    <a href="/Taxi/Pretraga">Pretraga voznji</a>
-</div>
-<h2 align="center">Dobrodosli, @(((Korisnik)Session["Ulogovan"]).Ime) @(((Korisnik)Session["Ulogovan"]).Prezime)</h2>
+<head>
+    @{
+        var getVoznje = new Func<Dictionary<string, Voznja>>(() => (Dictionary<string, Voznja>)Session["Voznje"]);
+    }
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body style="background-image:url(https://static.superiorwallpapers.com/images/lthumbs/2015-05/7926_Yellow-taxi-from-New-York-City.jpg); background-repeat: no-repeat; background-size: cover">
+    <div align="center" class="w3-bar w3-border w3-transparent w3-border-black">
+        <a href="/Taxi/Logout" class="w3-bar-item w3-button w3-right w3-text-white">Logout</a>
+        &nbsp;
+        <a href="/Taxi/Izmena" class="w3-bar-item w3-button w3-right w3-text-white">Izmenite profil</a>
+        &nbsp;
+        <a href="/Taxi/MusterijaZahtev class="w3-bar-item w3-button w3-right w3-text-white"">Zatrazite voznju</a>
+        &nbsp;
+        <a href="/Taxi/Pregledaj" class="w3-bar-item w3-button w3-right w3-text-white">Upravljanje voznjama</a>
+        &nbsp;
+        <a href="/Taxi/Pretraga" class="w3-bar-item w3-button w3-right w3-text-white">Pretraga voznji</a>
+    </div>
+    <h2 class="w3-bar-item w3-button w3-right w3-text-white">Dobrodosli, @(((Korisnik)Session["Ulogovan"]).Ime) @(((Korisnik)Session["Ulogovan"]).Prezime)</h2>
 
     @if (ViewBag.broj != 0)
     {
-      <table align="center" border="1">
-        <caption>Prikaz voznji</caption>
-        <tr>
-            <th>
-                Ulica
-            </th>
-            <th>
-                Broj
-            </th>
-            <th>
-                Vreme porudzbine
-            </th>
-            <th>
-                Status
-            </th>
-        </tr>
-        @foreach (KeyValuePair<string, Voznja> kv in getVoznje())
-        {
-            if (kv.Value.Musterija.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
+        <table align="center" border="1" style="background-color:transparent" class="w3-text-white w3-large">
+            <caption>Prikaz voznji</caption>
+            <tr>
+                <th>
+                    Ulica
+                </th>
+                <th>
+                    Broj
+                </th>
+                <th>
+                    Vreme porudzbine
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+            @foreach (KeyValuePair<string, Voznja> kv in getVoznje())
             {
-                <tr>
-                    <td>
-                        @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Ulica
-                    </td>
-                    <td>
-                        @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Broj
-                    </td>
-                    <td>
-                        @kv.Key
-                    </td>
-                    <td>
-                        @kv.Value.StatusVoznje
-                    </td>
-                </tr>
+                if (kv.Value.Musterija.KorisnickoIme.Equals((((Korisnik)Session["Ulogovan"]).KorisnickoIme)))
+                {
+                    <tr>
+                        <td>
+                            @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Ulica
+                        </td>
+                        <td>
+                            @kv.Value.LokacijaDolaskaTaxi.AdresaLok.Broj
+                        </td>
+                        <td>
+                            @kv.Key
+                        </td>
+                        <td>
+                            @kv.Value.StatusVoznje
+                        </td>
+                    </tr>
+                }
             }
-        }
-      </table>
+        </table>
     }
     <br />
     <form action="/Taxi/FilterMusterija" method="post">
@@ -83,7 +87,7 @@
                 Uspesne
             </option>
         </select>
-        <input type="submit" value="Filtriraj voznje" />
+        <input type="submit" value="Filtriraj voznje" style="background-color:transparent; border:none" class="w3-text-white w3-hover-purple" />
     </form>
     <form action="/Taxi/SortiranjeMusterija" method="post">
         <select name="sortiranje">
@@ -94,5 +98,6 @@
                 Po oceni
             </option>
         </select>
-        <input type="submit" value="Sortiraj voznje" />
+        <input type="submit" value="Sortiraj voznje" style="background-color:transparent; border:none" class="w3-text-white w3-hover-purple" />
     </form>
+</body>
