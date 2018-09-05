@@ -1,0 +1,107 @@
+﻿@using Taxi_MVC.Models;
+@{
+    Layout = null;
+}
+
+<h2>Korisnicko ime je zauzeto, izaberite drugo korisnciko ime</h2>
+
+<form action="/Taxi/Izmeni" method="post">
+    <table border="0">
+        <tr>
+            <td>
+                Korisnicko ime
+            </td>
+            <td>
+                <input type="text" name="KorisnickoIme">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Lozinka
+            </td>
+            <td>
+                <input type="password" value="@ViewBag.korisnik.Lozinka" name="Lozinka"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Ime
+            </td>
+            <td>
+                <input type="text" value="@ViewBag.korisnik.Ime" name="Ime"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Prezime
+            </td>
+            <td>
+                <input type="text" value="@ViewBag.korisnik.Prezime" name="Prezime"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Lozinka
+            </td>
+            <td>
+                <input required type="password" name="Lozinka">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Pol
+            </td>
+            <td>
+                <select name="Pol">
+                    @if (ViewBag.korisnik.Pol == EPol.MUSKI)
+                    {
+                        <option selected value="MUSKI">
+                            Muski
+                        </option>
+                        <option value="ZENSKI">
+                            Zenki
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="MUSKI">
+                            Muski
+                        </option>
+                        <option selected value="ZENSKI">
+                            Zenki
+                        </option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Email
+            </td>
+            <td>
+                <input type="email" value="@ViewBag.korisnik.Email" name="Email" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                JMBG
+            </td>
+            <td>
+                <input type="text" value="@ViewBag.korisnik.JMBG" name="JMBG"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Telefon
+            </td>
+            <td>
+                <input type="tel" value="@ViewBag.korisnik.Telefon" name="Telefon" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="Register" />
+            </td>
+        </tr>
+    </table>
+</form>

@@ -1,0 +1,64 @@
+﻿@using Taxi_MVC.Models;
+@{
+    Layout = null;
+}
+
+<form action="/Taxi/PromenaLokacije" method="post">
+    <input hidden type="text" value="@(((Vozac)Session["Ulogovan"]).KorisnickoIme)" name="log" />
+    <table border="0">
+        <tr>
+            <td>
+                X koordinata
+            </td>
+            <td>
+                <input type="number" value="@(((Vozac)Session["Ulogovan"]).LokVozac.XCoord)" name="Xkoordinata" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Y koordinata
+            </td>
+            <td>
+                <input type="number" value="@(((Vozac)Session["Ulogovan"]).LokVozac.YCoord)" name="Ykoordinata" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Ulica
+            </td>
+            <td>
+                <input type="text" value="@(((Vozac)Session["Ulogovan"]).LokVozac.AdresaLok.Ulica)" name="Ulica" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Broj
+            </td>
+            <td>
+                <input type="number" value="@(((Vozac)Session["Ulogovan"]).LokVozac.AdresaLok.Broj)" name="Broj" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Mesto
+            </td>
+            <td>
+                <input type="text" value="@(((Vozac)Session["Ulogovan"]).LokVozac.AdresaLok.Mesto)" name="Mesto" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Pozivni broj
+            </td>
+            <td>
+                <input type="number" value="@(((Vozac)Session["Ulogovan"]).LokVozac.AdresaLok.PozivniBroj)" name="PozivniBroj" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" value="Save" />
+            </td>
+        </tr>
+    </table>
+</form>
+

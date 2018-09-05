@@ -208,6 +208,12 @@
     <Content Include="Views\Taxi\IzmenaAdmin.cshtml" />
     <Content Include="Views\Taxi\IzmenaVozac.cshtml" />
     <Content Include="Views\Taxi\Izmena.cshtml" />
+    <Content Include="Views\Taxi\RegistrationError2.cshtml" />
+    <Content Include="Views\Taxi\IzmenaVozacError.cshtml" />
+    <Content Include="Views\Taxi\KreiranjeVozaca.cshtml" />
+    <Content Include="Views\Taxi\PromenaLokacije.cshtml" />
+    <Content Include="Views\Taxi\MusterijaZahtev.cshtml" />
+    <Content Include="Views\Taxi\PregledSvihVoznjiMusterija.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
