@@ -59,10 +59,10 @@
       </table>
     }
     <br />
-    <forma text-align="center" action="/Taxi/FilterMusterija" method="post">
+    <form action="/Taxi/FilterMusterija" method="post">
         <select name="status">
-            <option value="NACEKANJU">
-                Na cekanju
+            <option value="KREIRANA">
+                Kreirana
             </option>
             <option value="FORMIRANA">
                 Formirane
@@ -84,8 +84,8 @@
             </option>
         </select>
         <input type="submit" value="Filtriraj voznje" />
-    </forma>
-    <form text-align="center" action="/Taxi/SortirajMusterije" method="post">
+    </form>
+    <form action="/Taxi/SortiranjeMusterija" method="post">
         <select name="sortiranje">
             <option value="datum">
                 Po datumu

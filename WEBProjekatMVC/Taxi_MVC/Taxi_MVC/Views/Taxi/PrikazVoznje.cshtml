@@ -9,11 +9,15 @@
             Vozac
         </td>
         <td>
-            @ViewBag.voznja.vozac.KorisnickoIme
+            @try
+            {
+                @ViewBag.voznja.Vozac.KorisnickoIme
+            }
+            catch { }
         </td>
     </tr>
     <tr>
-        <td colspan="2">
+        <td colspan="2" align="center">
             Polazak
         </td>
     </tr>
@@ -38,7 +42,7 @@
             Ulica
         </td>
         <td>
-            @ViewBag.voznja.LokacijaDolaskaTaxi.Ulica
+            @ViewBag.voznja.LokacijaDolaskaTaxi.AdresaLok.Ulica
         </td>
     </tr>
     <tr>
@@ -46,7 +50,7 @@
             Broj
         </td>
         <td>
-            @ViewBag.voznja.LokacijaDolaskaTaxi.Broj
+            @ViewBag.voznja.LokacijaDolaskaTaxi.AdresaLok.Broj
         </td>
     </tr>
     <tr>
@@ -54,7 +58,7 @@
             Mesto
         </td>
         <td>
-            @ViewBag.voznja.LokacijaDolaskaTaxi.Mesto
+            @ViewBag.voznja.LokacijaDolaskaTaxi.AdresaLok.Mesto
         </td>
     </tr>
     <tr>
@@ -62,11 +66,11 @@
             Pozivni broj
         </td>
         <td>
-            @ViewBag.voznja.LokacijaDolaskaTaxi.PozivniBroj
+            @ViewBag.voznja.LokacijaDolaskaTaxi.AdresaLok.PozivniBroj
         </td>
     </tr>
     <tr>
-        <td colspan="2">
+        <td colspan="2" align="center">
             Destinacija
         </td>
     </tr>
@@ -101,7 +105,7 @@
         <td>
             @try
             {
-                @ViewBag.voznja.Odrediste.Ulica
+                @ViewBag.voznja.Odrediste.AdresaLok.Ulica
             }
             catch { }
         </td>
@@ -113,7 +117,7 @@
         <td>
             @try
             {
-                @ViewBag.voznja.Odrediste.Broj
+                @ViewBag.voznja.Odrediste.AdresaLok.Broj
             }
             catch { }
         </td>
@@ -125,7 +129,7 @@
         <td>
             @try
             {
-                @ViewBag.voznja.Odrediste.Mesto
+                @ViewBag.voznja.Odrediste.AdresaLok.Mesto
             }
             catch { }
         </td>
@@ -137,7 +141,7 @@
         <td>
             @try
             {
-                @ViewBag.voznja.Odrediste.PozivniBroj
+                @ViewBag.voznja.Odrediste.AdresaLok.PozivniBroj
             }
             catch { }
         </td>
@@ -157,9 +161,9 @@
         <td>
             @try
             {
-                if(ViewBag.voznja.KomentarNaVoznju.OstavioKorisnik.KorisnickoIme != null)
+                if(ViewBag.voznja.KomentarNaVoznje.OstavioKorisnik.KorisnickoIme != null)
                 {
-                    @ViewBag.voznja.KomentarNaVoznju.OstavioKorisnik.KorisnickoIme
+                    @ViewBag.voznja.KomentarNaVoznje.OstavioKorisnik.KorisnickoIme
                 }
             }
             catch { }
@@ -172,9 +176,9 @@
         <td>
             @try
             {
-                if(ViewBag.voznja.KomentarNaVoznju.Ocena != null)
+                if(ViewBag.voznja.KomentarNaVoznje.Ocena != null)
                 {
-                    @ViewBag.voznja.KomentarNaVoznju.Ocena
+                    @ViewBag.voznja.KomentarNaVoznje.Ocena
                 }
             }
             catch { }
@@ -187,9 +191,9 @@
         <td>
             @try
             {
-                if(ViewBag.voznja.KomentarNaVoznju.Opis != null)
+                if(ViewBag.voznja.KomentarNaVoznje.Opis != null)
                 {
-                    @ViewBag.voznja.KomentarNaVoznju.Opis
+                    @ViewBag.voznja.KomentarNaVoznje.Opis
                 }
             }
             catch { }
@@ -202,9 +206,9 @@
         <td>
             @try
             {
-                if(ViewBag.voznja.KomentarNaVoznju.DatumObjave != null)
+                if(ViewBag.voznja.KomentarNaVoznje.DatumObjave != null)
                 {
-                    @ViewBag.voznja.KomentarNaVoznju.DatumObjave
+                    @ViewBag.voznja.KomentarNaVoznje.DatumObjave
                 }
             }
             catch { }

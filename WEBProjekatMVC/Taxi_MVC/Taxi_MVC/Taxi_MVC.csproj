@@ -229,6 +229,7 @@
     <Content Include="Views\Taxi\Pretraga.cshtml" />
     <Content Include="Views\Taxi\PretragaAdmin.cshtml" />
     <Content Include="Views\Taxi\FiltriranoAdmin.cshtml" />
+    <Content Include="Views\Taxi\PromeniStatusVoznjeError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

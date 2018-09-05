@@ -41,6 +41,16 @@ namespace Taxi_MVC.Controllers
             writer3.Close();
         }
 
+        /*private void IspisVoznje()
+        {
+            StreamWriter writer4 = new StreamWriter(path + "packages/Voznje.txt");
+
+            foreach(KeyValuePair<string,Voznja> kv in getVoznje)
+            {
+                writer4.WriteLine(kv.Value.LokacijaDolaskaTaxi.XCoord + " " + kv.Value.LokacijaDolaskaTaxi.YCoord + " " + kv.Value.LokacijaDolaskaTaxi.AdresaLok.Ulica + " " + kv.Value.LokacijaDolaskaTaxi.AdresaLok.Broj + " " + kv.Value.LokacijaDolaskaTaxi.AdresaLok.Mesto + " " + kv.Value.LokacijaDolaskaTaxi.AdresaLok.PozivniBroj + " " + kv.Value.DatumVremePorudzbine.ToString() + " " + kv.Value.StatusVoznje + " " + kv.Value.Musterija.KorisnickoIme + " " + kv.Value.Musterija.Lozinka + " " + kv.Value.Musterija.Ime + " " + kv.Value.Musterija.Prezime + " " + kv.Value.Musterija.Pol + " " + kv.Value.Musterija.Email + " " + kv.Value.Musterija.JMBG + " " + kv.Value.Musterija.Telefon);
+            }
+        }*/
+
         private Dictionary<string, Korisnik> getKorisnik
         {
             get
@@ -109,7 +119,7 @@ namespace Taxi_MVC.Controllers
             return View("Index");
         }
 
-
+        [HttpPost]
         public ActionResult Login(string korisnickoIme, string lozinka)
         {
             int i = 0;
@@ -210,7 +220,7 @@ namespace Taxi_MVC.Controllers
             return View("IzmenaAdmin");
         }
 
-        public ActionResult Odjava()
+        public ActionResult Logout()
         {
             Session["Ulogovan"] = null;
             return View("Index");
@@ -314,6 +324,7 @@ namespace Taxi_MVC.Controllers
 
                 }
             }
+            
             ViewBag.broj = i;
             return View("HomepageAdministrator");
         }
@@ -326,9 +337,10 @@ namespace Taxi_MVC.Controllers
         [HttpPost]
         public ActionResult KreiranjeVozaca(Vozac voz, Automobil auto, Lokacija lok, Adresa adr)
         {
-            voz.AutoVozac = auto;
             auto.VozacAuto = voz;
+            voz.AutoVozac = auto;
             lok.AdresaLok = adr;
+            voz.LokVozac = lok;
             voz.Zauzet = false;
             voz.Uloga = EUloga.VOZAC;
 
@@ -405,9 +417,11 @@ namespace Taxi_MVC.Controllers
             v.Vozac = new Vozac();
             v.KomentarNaVoznje = new Komentar();
             getVoznje.Add(v.DatumVremePorudzbine.ToString(), v);
-            return View("PregledSvihVoznjiMusterije");
+            //IspisVoznje();
+            return View("PregledSvihVoznjiMusterija");
         }
 
+        [HttpPost]
         public ActionResult Otkazivanje(string date)
         {
             bool test = false;
@@ -425,6 +439,11 @@ namespace Taxi_MVC.Controllers
             {
                 return View("OtkazivanjeError");
             }
+        }
+
+        public ActionResult Pregledaj()
+        {
+            return View("PregledSvihVoznjiMusterija");
         }
 
         public ActionResult GoToHome()
@@ -673,7 +692,7 @@ namespace Taxi_MVC.Controllers
                         }
                         else
                         {
-                            return View("OdredistreUnos");
+                            return View("OdredisteUnos");
                         }
                     }
                 }

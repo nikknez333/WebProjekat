@@ -76,7 +76,7 @@ namespace Taxi_MVC
                 vozac.Lozinka = line.Split(' ')[1];
                 vozac.Ime = line.Split(' ')[2];
                 vozac.Prezime = line.Split(' ')[3];
-                if (line.Split(' ')[4].ToLower().Equals("m"))
+                if (line.Split(' ')[4].Equals("MUSKI"))
                 {
                     vozac.Pol = EPol.MUSKI;
                 }
@@ -150,6 +150,78 @@ namespace Taxi_MVC
             HttpContext.Current.Session["RegistrovaniKorisnici"] = korisnici;
 
             HttpContext.Current.Session["Voznje"] = new Dictionary<string, Voznja>();
+
+            Dictionary<string, Voznja> voznje = new Dictionary<string, Voznja>();
+            if (!File.Exists(path + "packages/Voznje.txt"))
+            {
+                File.Create(path + "packages/Voznje.txt");
+            }
+            StreamReader reader4 = new StreamReader(path + "packages/Voznje.txt");
+            while((line = reader4.ReadLine()) != null)
+            {
+                Voznja v = new Voznja();
+                v.LokacijaDolaskaTaxi = new Lokacija();
+                v.LokacijaDolaskaTaxi.XCoord = double.Parse(line.Split(' ')[0]);
+                v.LokacijaDolaskaTaxi.YCoord = double.Parse(line.Split(' ')[1]);
+                v.LokacijaDolaskaTaxi.AdresaLok = new Adresa();
+                v.LokacijaDolaskaTaxi.AdresaLok.Ulica = line.Split(' ')[2];
+                v.LokacijaDolaskaTaxi.AdresaLok.Broj = Int32.Parse(line.Split(' ')[3]);
+                v.LokacijaDolaskaTaxi.AdresaLok.Mesto = line.Split(' ')[4];
+                v.LokacijaDolaskaTaxi.AdresaLok.PozivniBroj = Int32.Parse(line.Split(' ')[5]);
+                v.DatumVremePorudzbine = DateTime.Parse(line.Split(' ')[6]);
+                if (line.Split(' ')[7].ToLower().Equals("kreirana"))
+                {
+                    v.StatusVoznje = Models.EStatus.KREIRANA;
+                    
+                }
+                else if (line.Split(' ')[7].ToLower().Equals("formirana"))
+                {
+                    v.StatusVoznje = Models.EStatus.FORMIRANA;
+                }
+                else if (line.Split(' ')[7].ToLower().Equals("obradjena"))
+                {
+                    v.StatusVoznje = Models.EStatus.OBRADJENA;
+                }
+                else if(line.Split(' ')[7].ToLower().Equals("prihvacena"))
+                {
+                    v.StatusVoznje = Models.EStatus.PRIHVACENA;
+                }
+                else if(line.Split(' ')[7].ToLower().Equals("otkazana"))
+                {
+                    v.StatusVoznje = Models.EStatus.OTKAZANA;
+                }
+                else if(line.Split(' ')[7].ToLower().Equals("neuspesna"))
+                {
+                    v.StatusVoznje = Models.EStatus.NEUSPESNA;
+                }
+                else if(line.Split(' ')[7].ToLower().Equals("uspesna"))
+                {
+                    v.StatusVoznje = Models.EStatus.USPESNA;
+                }
+                v.Musterija = new Korisnik();
+                v.Musterija.KorisnickoIme = line.Split(' ')[8];
+                v.Musterija.Lozinka = line.Split(' ')[9];
+                v.Musterija.Ime = line.Split(' ')[10];
+                v.Musterija.Prezime = line.Split(' ')[11];
+                if(line.Split(' ')[12].ToLower().Equals("m"))
+                {
+                    v.Musterija.Pol = EPol.MUSKI;
+                }
+                else
+                {
+                    v.Musterija.Pol = EPol.ZENSKI;
+                }
+                v.Musterija.Email = line.Split(' ')[13];
+                v.Musterija.JMBG = line.Split(' ')[14];
+                v.Musterija.Telefon = line.Split(' ')[15];
+                v.Musterija.Uloga = EUloga.MUSTERIJA;
+                v.Vozac = new Vozac();
+               
+                voznje.Add(v.DatumVremePorudzbine.ToString(), v);
+
+                reader4.Close();
+                HttpContext.Current.Session["Voznje"] = voznje;
+            }
         }
     }
 }

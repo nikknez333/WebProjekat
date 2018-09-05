@@ -10,7 +10,7 @@
                 Korisnicko ime
             </td>
             <td>
-                <input type="text" value="@(((Korisnik)Session["Ulogovan"]).KorisnickoIme)" name="KorisnickoIme" />
+                <input type="text" value="@(((Vozac)Session["Ulogovan"]).KorisnickoIme)" name="KorisnickoIme" />
             </td>
         </tr>
         <tr>
@@ -18,7 +18,7 @@
                 Lozinka
             </td>
             <td>
-                <input required type="password" value="@(((Korisnik)Session["Ulogovan"]).Lozinka)" name="Lozinka" />
+                <input required type="password" value="@(((Vozac)Session["Ulogovan"]).Lozinka)" name="Lozinka" />
             </td>
         </tr>
         <tr>
@@ -26,7 +26,7 @@
                 Ime
             </td>
             <td>
-                <input type="text" value="@(((Korisnik)Session["Ulogovan"]).Ime)" name="Ime" />
+                <input type="text" value="@(((Vozac)Session["Ulogovan"]).Ime)" name="Ime" />
             </td>
         </tr>
         <tr>
@@ -34,7 +34,7 @@
                 Prezime
             </td>
             <td>
-                <input type="text" value="@(((Korisnik)Session["Ulogovan"]).Prezime)" name="Prezime" />
+                <input type="text" value="@(((Vozac)Session["Ulogovan"]).Prezime)" name="Prezime" />
             </td>
         </tr>
         <tr>
@@ -43,25 +43,24 @@
             </td>
             <td>
                 <select name="Pol">
-                    @if ((((Korisnik)Session["Ulogovan"]).Pol) == EPol.MUSKI)
-                {
-                    <option selected value="MUSKI">
-                        Muski
-                    </option>
-                    <option value="ZENSKI">
-                        Zenski
-                    </option>
-            }
-            else
-            {
-                <option value="MUSKI">
-                    Muski
-                </option>
-                <option selected value="ZENSKI">
-                    Zenski
-                </option>
-        }
-
+                    @if ((((Vozac)Session["Ulogovan"]).Pol) == EPol.MUSKI)
+                    {
+                        <option selected value="MUSKI">
+                            Muski
+                        </option>
+                        <option value="ZENSKI">
+                            Zenski
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="MUSKI">
+                            Muski
+                        </option>
+                        <option selected value="ZENSKI">
+                            Zenski
+                        </option>
+                    }
                 </select>
             </td>
         </tr>
@@ -70,7 +69,7 @@
                 Email
             </td>
             <td>
-                <input type="email" value="@(((Korisnik)Session["Ulogovan"]).Email)" name="Email" />
+                <input type="email" value="@(((Vozac)Session["Ulogovan"]).Email)" name="Email" />
             </td>
         </tr>
         <tr>
@@ -78,7 +77,7 @@
                 JMBG
             </td>
             <td>
-                <input type="number" value="@(((Korisnik)Session["Ulogovan"]).JMBG)" name="JMBG" />
+                <input type="number" value="@(((Vozac)Session["Ulogovan"]).JMBG)" name="JMBG" />
             </td>
         </tr>
         <tr>
@@ -86,7 +85,7 @@
                 Telefon
             </td>
             <td>
-                <input type="number" value="@(((Korisnik)Session["Ulogovan"]).Telefon)" name="Telefon" />
+                <input type="number" value="@(((Vozac)Session["Ulogovan"]).Telefon)" name="Telefon" />
             </td>
         </tr>
         <tr>
